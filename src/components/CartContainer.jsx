@@ -2,6 +2,7 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { clearCart } from "../features/cart/cartSlice";
 import CartItem from "./CartItem";
+import { openModel, closeModel } from "../features/model/modelSlice";
 
 function CartContainer() {
   const dispatch = useDispatch();
@@ -13,7 +14,7 @@ function CartContainer() {
         <p className="mt-10 text-gray-500">your bag is empty...</p>
       ) : (
         <div className="flex flex-col w-full mt-10 items-center">
-          {cartItems.map((item) => {
+          {cartItems?.map((item) => {
             return <CartItem key={item.id} {...item} />;
           })}
           <hr className="text-black border w-4/5 mt-5 " />
@@ -22,8 +23,10 @@ function CartContainer() {
             <p>$ {total.toFixed(2)}</p>
           </div>
           <button
-            onClick={() => dispatch(clearCart())}
-            className="w-36 p-2 mt-10 border-purple-500 border-2 text-purple-500"
+            onClick={() => dispatch(openModel())}
+            className="w-36 p-2 mt-10 border-purple-500 border-2 text-purple-500 "
+            data-bs-toggle="modal"
+            data-bs-target="ModalCentered"
           >
             Clear Cart
           </button>
